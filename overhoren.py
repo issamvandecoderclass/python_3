@@ -4,7 +4,7 @@ import sys
 
 def groeting():
     os.system("cls")
-    groeting.start = input("|a|: Nieuwe woordenlijst maken. \n |b|: woorden toe te voegen aan een woordenlijst. \n |h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n |s| Overhoren. \n |g|: Stoppen met het programma. \n")
+    groeting.start = input("|a|: Nieuwe woordenlijst maken. \n |b|: woorden toe te voegen aan een woordenlijst. \n |h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n |s| Overhoren. \n |q|: Stoppen met het programma. \n")
 
 def nieuwe_lijst_naam():
     naam_woordenlijst = input("Hoe wil je je woordenlijst noemen? ")
@@ -27,15 +27,15 @@ def overhoren():
 def geef_afscheid():
     print("Dit programma sluit over 5 seconden")
     print("5")
-    time.sleep(1)
+    time.sleep(0.5)
     print("4")
-    time.sleep(1)
+    time.sleep(0.5)
     print("3")
-    time.sleep(1)
+    time.sleep(0.5)
     print("2")
-    time.sleep(1)
+    time.sleep(0.5)
     print("1")
-    time.sleep(1)
+    time.sleep(0.5)
     sys.exit()
 
 def voeg_woorden_toe():
