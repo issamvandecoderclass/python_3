@@ -4,12 +4,14 @@ import sys
 
 def groeting():
     os.system("cls")
-    groeting.start = input("|a|: Nieuwe woordenlijst maken. \n |b|: woorden toe te voegen aan een woordenlijst. \n |h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n |s| Overhoren. \n |q|: Stoppen met het programma. \n")
+    groeting.start = input("|a|: Nieuwe woordenlijst maken. \n |b|: woorden toe te voegen aan een woordenlijst. \n |h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n |s|: Overhoren. \n |q|: Stoppen met het programma. \n")
 
 def nieuwe_lijst_naam():
     naam_woordenlijst = input("Hoe wil je je woordenlijst noemen? ")
+    print("\n" * 5)
     with open(naam_woordenlijst,"w+") as f:
       f.write("Bestand is aangemaakt")
+    main()
 
 def lijst_verwijderen():
     del_lijst = input("Welke lijst wil je verwijderen? ")
@@ -17,12 +19,21 @@ def lijst_verwijderen():
     if bestaat_lijst_del:
         os.remove(del_lijst)
         print("Lijst " + del_lijst + " is succesvol verwijdert.")
+        print("\n" * 5)
+        main()
     else:
-        print("Bestand bestaat niet, dus kan het ook niet verwijdert worden!")
+        print("Bestand bestaat niet, dus kan het ook niet verwijdert worden!\n")
+        print("\n" * 5)
+        main()
 
 
 def overhoren():
-    print(" Overhoren")
+    lijst_overhoor = input("Welke lijst wil je overhoren? ")
+    bestaat_lijst_overhoor = os.path.isfile(lijst_overhoor)
+    if bestaat_lijst_overhoor:
+        print("Je kan worden overhoort.")
+    else:
+        print("Bestand kan niet worden overhoort.")
 
 def geef_afscheid():
     print("Dit programma sluit over 5 seconden")
@@ -41,7 +52,7 @@ def geef_afscheid():
 def voeg_woorden_toe():
     print("Voeg woorden toe")
     lijst_keuze = input("Naar welke lijst wil je toe.")
-    bestaat_lijst = os.path.isfile(lijst_keuze)
+    bestaat_lijst = os.path.isfile(lijqst_keuze)
     if bestaat_lijst == True:
         print("bestaat")
     else:
