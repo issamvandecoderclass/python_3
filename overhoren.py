@@ -9,8 +9,14 @@ def groeting():
 def nieuwe_lijst_naam():
     print("\n" * 11)
     naam_woordenlijst = input("Hoe wil je je woordenlijst noemen? ")
-    with open(naam_woordenlijst,"w+") as f:
-      f.write("Bestand is aangemaakt")
+    bestaat_al = os.path.isfile(naam_woordenlijst)
+    if bestaat_al:
+        print("bestaat al")
+    else:
+        with open(naam_woordenlijst,"w+") as f:
+            f.write("Bestand is aangemaakt")
+        print("Nieuwe woorden lijst: " + naam_woordenlijst + " is gemaakt.")
+    print("\n" * 5)
     main()
 
 def lijst_verwijderen():
@@ -20,7 +26,8 @@ def lijst_verwijderen():
     if bestaat_lijst_del:
         os.remove(del_lijst)
         print("\n" * 5)
-        print("Lijst " + del_lijst + " is succesvol verwijdert.")
+        print("Lijst " + del_lijst +  " is succesvol verwijdert.")
+        print("\n" * 1)
         main()
     else:
         print("\n" * 5)
@@ -53,7 +60,7 @@ def geef_afscheid():
 def voeg_woorden_toe():
     print("Voeg woorden toe")
     lijst_keuze = input("Naar welke lijst wil je toe.")
-    bestaat_lijst = os.path.isfile(lijqst_keuze)
+    bestaat_lijst = os.path.isfile(lijst_keuze)
     if bestaat_lijst == True:
         print("bestaat")
     else:
