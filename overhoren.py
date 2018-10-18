@@ -4,14 +4,14 @@ import sys
 
 def groeting():
     os.system("cls")
-    groeting.start = input("|a|: nieuwe woordenlijst maken. \n "
+    groeting.start = input(" |a|: nieuwe woordenlijst maken. \n "
                            "|b|: woorden toe te voegen aan een woordenlijst. \n "
                            "|h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n "
                            "|s|: Overhoren. \n "
                            "|q|: Stoppen met het programma. \n")
 
 def nieuwe_lijst_naam():
-    print("\n" * 11)
+    print("\n" * 30)
     naam_woordenlijst = input("Hoe wil je je woordenlijst noemen? ")
     bestaat_al = os.path.isfile(naam_woordenlijst)
     if bestaat_al:
@@ -23,6 +23,7 @@ def nieuwe_lijst_naam():
             f.write("Bestand is aangemaakt")
         print("\n" * 5)
         print("Nieuwe woorden lijst - " + naam_woordenlijst + " - is gemaakt.")
+        print("\n" * 2)
     main()
 
 def lijst_verwijderen():
@@ -73,9 +74,15 @@ def voeg_woorden_toe():
     lijst_keuze = input("Naar welke lijst wil je toe?")
     bestaat_lijst = os.path.isfile(lijst_keuze)
     if bestaat_lijst == True:
-        print("bestaat")
+        nederlands = ""
+        ander_taal = input("naar welke taal wil je vertalen: ")
+        while (nederlands != "q"):
+            nederlands = input("Nederlands woord: ")
+            ander_taal = input(ander_taal + " woord: ")
+
     else:
         print("Bestand bestaat niet")
+        main()
 
 def verander_woordenlijst():
     print("Verander woordenlijst")
