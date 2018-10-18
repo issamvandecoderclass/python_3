@@ -4,7 +4,11 @@ import sys
 
 def groeting():
     os.system("cls")
-    groeting.start = input("|a|: nieuwe woordenlijst maken. \n |b|: woorden toe te voegen aan een woordenlijst. \n |h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n |s|: Overhoren. \n |q|: Stoppen met het programma. \n")
+    groeting.start = input("|a|: nieuwe woordenlijst maken. \n "
+                           "|b|: woorden toe te voegen aan een woordenlijst. \n "
+                           "|h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n "
+                           "|s|: Overhoren. \n "
+                           "|q|: Stoppen met het programma. \n")
 
 def nieuwe_lijst_naam():
     print("\n" * 11)
@@ -12,7 +16,8 @@ def nieuwe_lijst_naam():
     bestaat_al = os.path.isfile(naam_woordenlijst)
     if bestaat_al:
         print("\n" * 5)
-        print("bestaat al")
+        print("bestand " + naam_woordenlijst + " bestaat al")
+        print("\n" * 1)
     else:
         with open(naam_woordenlijst,"w+") as f:
             f.write("Bestand is aangemaakt")
