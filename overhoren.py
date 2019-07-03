@@ -21,20 +21,7 @@ def main():
     keuze = input("Welke letter geef je mij mee?:")
     woorden = {}
     if (keuze == 'q'):
-        print("Dit programma sluit over 5 seconden,")
-        print("5")
-        time.sleep(0.5)
-        print("4")
-        time.sleep(0.5)
-        print("3")
-        time.sleep(0.5)
-        print("2")
-        time.sleep(0.5)
-        print("1")
-        time.sleep(0.5)
-        print("0")
-        time.sleep(0.5)
-        sys.exit()
+        stoppen()
     while keuze != 'q':
         if (keuze == 'b'):
             bekijk_lijst(woorden)
@@ -59,27 +46,18 @@ def nieuwe_lijst(woorden):
     print("'q' om te stoppenn")
     print("Laten we beginnen!")
     woorden = {}
-
     key = input("Nederlands:")
     while key != "q":
         value = input("Engels:")
         woorden[key] = value
+        f = open('lijstwoorden.txt', 'w')
+        for key in woorden:
+            f.write(key + ':' + value)
         key = input("Nederlands:")
-    f = open('lijstwoorden.txt', 'w')
-    for key in woorden: #loopt het x keer x = aantal keys
-        f.write(key + ':' + value)
     f.close()
     print("Je bent klaar met je lijst!")
     print("Als je nog meer woorden wilt wijzigen, kan dat in het menu")
     return woorden
-
-def opslaan(woorden):
-    print_schermbreedte()
-    f = open('woorden.txt', 'w')
-    for key, value in woorden:
-        f.write(key + ':' + value)
-    f.close()
-    print("Woorden als .txt bestand opgelagen")
 
 def wijzig_lijst(woorden):
     bekijk_lijst(woorden)
@@ -111,14 +89,32 @@ def overhoren_lijst(woorden):
         if (enwoord == woorden[nlwoord]):
             print("Dat is juist!")
             punten += 1
+            print("Je hebt nu " + punten + ".")
         elif (enwoord == 'q'):
             break
         else:
             print("Dat is helaas fout")
             print("Het goede antwoord:",woorden[nlwoord])
             punten -= 1
+            print("Je hebt nu " + punten + ".")
         while punten > 2:
             print("Je bent klaar!!", "Aantal punten:", punten)
             break
+
+def stoppen():
+    print("Dit programma sluit over 5 seconden,")
+    print("5")
+    time.sleep(0.5)
+    print("4")
+    time.sleep(0.5)
+    print("3")
+    time.sleep(0.5)
+    print("2")
+    time.sleep(0.5)
+    print("1")
+    time.sleep(0.5)
+    print("0")
+    time.sleep(0.5)
+    sys.exit()
 
 main()
