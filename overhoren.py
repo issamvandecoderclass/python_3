@@ -72,7 +72,7 @@ def wijzig_lijst(woorden):
 
 def verwijder_woord(woorden):
     bekijk_lijst(woorden)
-    print_schermbreedte()
+    strepen()
     key = input("Woord (NL) die je wilt verwijderen:") #input van de key die verwijderdt wilt worden
     vraag = input("Weet je zeker dat je dit woord wilt verwijderen?(ja/nee)")
     if (vraag == 'ja'):
