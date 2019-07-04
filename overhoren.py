@@ -52,7 +52,7 @@ def nieuwe_lijst(woorden):
         woorden[key] = value
         f = open('lijstwoorden.txt', 'w')
         for key in woorden:
-            f.write(key + ':' + value)
+            f.write(woorden[key] + ':' + value)
         key = input("Nederlands:")
     f.close()
     print("Je bent klaar met je lijst!")
@@ -89,14 +89,14 @@ def overhoren_lijst(woorden):
         if (enwoord == woorden[nlwoord]):
             print("Dat is juist!")
             punten += 1
-            print("Je hebt nu " + punten + ".")
+            print("Aantal punten: ",punten)
         elif (enwoord == 'q'):
             break
         else:
             print("Dat is helaas fout")
             print("Het goede antwoord:",woorden[nlwoord])
             punten -= 1
-            print("Je hebt nu " + punten + ".")
+            print("Aantal punten: ", punten)
         while punten > 2:
             print("Je bent klaar!!", "Aantal punten:", punten)
             break
