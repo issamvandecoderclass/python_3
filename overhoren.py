@@ -1,59 +1,107 @@
-import os
-import time
 import sys
+import random
+import time
+def strepen():
+    print("="* 40)
 
-def groeting():
-    os.system("cls")
-    groeting.start = input(" |a|: nieuwe woordenlijst maken. \n "
-                           "|b|: woorden toe te voegen aan een woordenlijst. \n "
-                           "|h|: woordenlijst veranderen. \n |x|: woordelijst verwijderen. \n "
-                           "|s|: Overhoren. \n "
-                           "|q|: Stoppen met het programma. \n")
+def welkom_keuze():
+    strepen()
+    print("Welkom bij mijn overhoor progamma!")
+    print("Tip: begin met een woordenlijst maken!")
+    strepen()
+    print("nieuwe lijst: n")
+    print("bekijk lijst: b")
+    print("wijzig lijst: w")
+    print("overhoor lijst: o")
+    print("Stop mijn programma: q")
+    strepen()
 
-def nieuwe_lijst_naam():
-    print("\n" * 30)
-    naam_woordenlijst = input("Hoe wil je je woordenlijst noemen? ")
-    bestaat_al = os.path.isfile(naam_woordenlijst)
-    if bestaat_al:
-        print("\n" * 5)
-        print("bestand " + naam_woordenlijst + " bestaat al")
-        print("\n" * 1)
-    else:
-        with open(naam_woordenlijst,"w+") as f:
-            f.write("Bestand is aangemaakt")
-        print("\n" * 5)
-        print("Nieuwe woorden lijst - " + naam_woordenlijst + " - is gemaakt.")
-        print("\n" * 2)
-    main()
-
-def lijst_verwijderen():
-    print("\n" * 11)
-    del_lijst = input("Welke lijst wil je verwijderen? ")
-    bestaat_lijst_del = os.path.isfile(del_lijst)
-    if bestaat_lijst_del:
-        os.remove(del_lijst)
-        print("\n" * 5)
-        print("Lijst - " + del_lijst +  " - is succesvol verwijdert.")
-        print("\n" * 1)
-        main()
-    else:
-        print("\n" * 5)
-        print("Bestand bestaat niet, dus kan het ook niet verwijdert worden!\n")
-        main()
+def main():
+    welkom_keuze()
+    keuze = input("Welke letter geef je mij mee?:")
+    woorden = {}
+    if (keuze == 'q'):
+        stoppen()
+    while keuze != 'q':
+        if (keuze == 'b'):
+            bekijk_lijst(woorden)
+        if (keuze == 'n'):
+            woorden = nieuwe_lijst(woorden)
+        if (keuze == 'w'):
+            wijzig_lijst(woorden)
+        if (keuze == 'o'):
+            overhoren_lijst(woorden)
+        strepen()
+        keuze = input("Welke letter geef je mij mee?: ")
 
 
-def overhoren():
-    lijst_overhoor = input("Welke lijst wil je overhoren? ")
-    bestaat_lijst_overhoor = os.path.isfile(lijst_overhoor)
-    if bestaat_lijst_overhoor:
-        print("Je kan worden overhoort.")
-    else:
-        print("\n" * 5)
-        print("Bestand kan niet worden overhoort.")
-        print("\n" * 1)
-        main()
+def bekijk_lijst(woorden):
+    strepen()
+    print("Nederlands : Engels")
+    for key in woorden:
+        print("{key} : {value}".format(key=key, value=woorden[key]))
 
-def geef_afscheid():
+def nieuwe_lijst(woorden):
+    strepen()
+    print("'q' om te stoppenn")
+    print("Laten we beginnen!")
+    woorden = {}
+    key = input("Nederlands:")
+    while key != "q":
+        value = input("Engels:")
+        woorden[key] = value
+        f = open('lijstwoorden.txt', 'w')
+        for key in woorden:
+            f.write("{}:{} ".format(key, woorden[key]))
+        key = input("Nederlands:")
+    f.close()
+    print("Je bent klaar met je lijst!")
+    print("Als je nog meer woorden wilt wijzigen, kan dat in het menu")
+    return woorden
+
+def wijzig_lijst(woorden):
+    bekijk_lijst(woorden)
+    strepen()
+    key = input("Woord (NL) dat je wilt veranderen:")
+    newnl = input("Nieuw woord:")
+    newen = input("Nieuwe vertaling:")
+    woorden[newnl] = newen
+    del woorden[key]
+    print("De nieuwe wijziging is aangebracht in je woorden lijst!")
+    return woorden
+
+def verwijder_woord(woorden):
+    bekijk_lijst(woorden)
+    strepen()
+    key = input("Woord (NL) die je wilt verwijderen:")
+    vraag = input("Weet je zeker dat je dit woord wilt verwijderen?(ja/nee)")
+    if (vraag == 'ja'):
+        del woorden[key]
+    return woorden
+
+def overhoren_lijst(woorden):
+    punten = 0
+    while punten < len(woorden.keys())*2:
+        strepen()
+        nlwoord = random.choice(list(woorden))
+        print("Wat is de vertaling van dit woord?")
+        enwoord = input(nlwoord + ":")
+        if (enwoord == woorden[nlwoord]):
+            print("Dat is juist!")
+            punten += 1
+            print("Aantal punten: ",punten)
+        elif (enwoord == 'q'):
+            break
+        else:
+            print("Dat is helaas fout")
+            print("Het goede antwoord:",woorden[nlwoord])
+            punten -= 1
+            print("Aantal punten: ", punten)
+        while punten > 2:
+            print("Je bent klaar!!", "Aantal punten:", punten)
+            break
+
+def stoppen():
     print("Dit programma sluit over 5 seconden,")
     print("5")
     time.sleep(0.5)
@@ -68,40 +116,5 @@ def geef_afscheid():
     print("0")
     time.sleep(0.5)
     sys.exit()
-
-def voeg_woorden_toe():
-    print("Voeg woorden toe")
-    lijst_keuze = input("Naar welke lijst wil je toe?")
-    bestaat_lijst = os.path.isfile(lijst_keuze)
-    if bestaat_lijst == True:
-        nederlands = ""
-        ander_taal = input("naar welke taal wil je vertalen: ")
-        while (nederlands != "q"):
-            nederlands = input("Nederlands woord: ")
-            ander_taal = input(ander_taal + " woord: ")
-
-    else:
-        print("Bestand bestaat niet")
-        main()
-
-def verander_woordenlijst():
-    print("Verander woordenlijst")
-
-
-def main():
-    groeting()
-    if groeting.start == "a":
-        nieuwe_lijst_naam()
-    if groeting.start == "b":
-        voeg_woorden_toe()
-    if groeting.start == "h":
-        verander_woordenlijst()
-    if groeting.start == "x":
-        lijst_verwijderen()
-    if groeting.start == "s":
-        overhoren()
-    if groeting.start == "q":
-        geef_afscheid()
-
 
 main()
